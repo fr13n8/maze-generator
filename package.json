@@ -1,0 +1,25 @@
+{
+  "name": "canvas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/script.js",
+  "types": "./src/script.ts",
+  "scripts": {
+    "run": "tsc './src/script.ts' --outFile './dist/script.js' -w",
+    "tsc": "tsc",
+    "tscw": "tsc --watch",
+    "wp": "webpack",
+    "wpw": "webpack --watch",
+    "serve": "http-server build",
+    "watch-poll": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.1.5",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
