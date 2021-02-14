@@ -13,21 +13,16 @@ import {
     BULDOZER_COUNTS,
     BULDOZER_COLOR,
     DELAY_TIMEOUT,
-    SHOW_ANIMATE
-} from '../utils/constants'
+    SHOW_ANIMATE,
+    ALGORITHM
+} from '../utils/state'
 
-let BULDOZERS: Array < CELL > = []
+const BULDOZERS: Array < CELL > = []
+
 let cell1: CELL = null!
-    let cell2: CELL = null!
-        let paths: Array < Array < null | boolean | number >> = []
+let cell2: CELL = null!
+let paths: Array < Array < null | boolean | number >> = []
 let route: Array < CELL > = []
-
-for (let i: number = 0; i < BULDOZER_COUNTS; i++) {
-    BULDOZERS.push({
-        x: 0,
-        y: 0
-    })
-}
 
 const rand = (array: Array < CELL > ): CELL => {
     const index: number = Math.floor(Math.random() * array.length)
@@ -38,9 +33,9 @@ const rand = (array: Array < CELL > ): CELL => {
 
 const createMatrix = (columns: number, rows: number): Array < Array < boolean >> => {
     const matrix: Array < Array < boolean >> = []
-    for (let y: number = 0; y < rows; y++) {
+    for (let y = 0; y < rows; y++) {
         const row: Array < boolean > = []
-        for (let x: number = 0; x < columns; x++) {
+        for (let x = 0; x < columns; x++) {
             row.push(false)
         }
         matrix.push(row)
@@ -57,14 +52,14 @@ const canvasW: number = canvas.width
 const canvasH: number = canvas.height
 const context: CanvasRenderingContext2D = canvas.getContext('2d') !
 
-    context.fillStyle = "black";
-context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "black"
+context.fillRect(0, 0, canvas.width, canvas.height)
 
 document.getElementById("canvas-container") !.appendChild(canvas)
 
 const generateMaze = (): void => {
-    for (let y: number = 0; y < COLUMNS_COUNT; y++) {
-        for (let x: number = 0; x < ROWS_COUNT; x++) {
+    for (let y = 0; y < COLUMNS_COUNT; y++) {
+        for (let x = 0; x < ROWS_COUNT; x++) {
             const color: string = matrix[y][x] ? FREE_COLOR : WALL_COLOR
 
             context.beginPath()
@@ -118,7 +113,7 @@ const moveBuldozer = (BULDOZER: CELL): void => {
 
     if (!matrix[BULDOZER.y][BULDOZER.x]) {
         matrix[BULDOZER.y][BULDOZER.x] = true
-        matrix[BULDOZER.y - x / 2][BULDOZER.x - y / 2] = true
+        matrix[BULDOZER.y - y / 2][BULDOZER.x - x / 2] = true
     }
 }
 
@@ -148,10 +143,10 @@ const createMouse = (element: HTMLCanvasElement) => {
         mouse.x = event.clientX - rect.left
         mouse.y = event.clientY - rect.top
     }
-    const mousedownHandler = (event: MouseEvent): void => {
+    const mousedownHandler = (): void => {
         mouse.left = true
     }
-    const mouseupHandler = (event: MouseEvent): void => {
+    const mouseupHandler = (): void => {
         mouse.left = false
     }
 
@@ -174,12 +169,8 @@ const getPath = (matrix: Array < Array < boolean >> , {
     y: y2
 }: CELL): Array < Array < null | boolean | number >> => {
 
-    for (let y: number = 0; y < matrix.length; y++) {
-        const row: Array < null | boolean > = []
-        for (let x: number = 0; x < matrix[y].length; x++) {
-            row.push(matrix[y][x] === false ? false : null)
-        }
-
+    for (let y = 0; y < matrix.length; y++) {
+        const row: Array < null | boolean > = matrix[y].map((cell: boolean) => cell === false ? false : null)
         paths.push(row)
     }
 
@@ -187,8 +178,8 @@ const getPath = (matrix: Array < Array < boolean >> , {
 
     while (paths[y1][x1] === null) {
 
-        for (let y: number = 0; y < matrix.length; y++) {
-            for (let x: number = 0; x < matrix[y].length; x++) {
+        for (let y = 0; y < matrix.length; y++) {
+            for (let x = 0; x < matrix[y].length; x++) {
                 if (paths[y][x] === false || paths[y][x] === null) {
                     continue
                 }
@@ -228,7 +219,7 @@ const getPath = (matrix: Array < Array < boolean >> , {
     }
 
     // let [x2, y2]: [number, number] = [y1, x1]
-    let endRouteValue: number = Number(paths[y1][x1])
+    let endRouteValue = Number(paths[y1][x1])
     route = []
 
     while (endRouteValue !== 1) {
@@ -308,7 +299,7 @@ const tick = async () => {
         }
 
         if (paths) {
-            for (let y: number = 0; y < paths.length; y++) {
+            for (let y = 0; y < paths.length; y++) {
                 paths[y].map((item: boolean | null | number, x: number) => {
                     if (item !== null && item !== false) {
                         context.fillStyle = "black"
@@ -343,12 +334,11 @@ const tick = async () => {
 }
 
 const isComlpeted = (): boolean => {
-    for (let y: number = 0; y < COLUMNS_COUNT; y += 2) {
-        for (let x: number = 0; x < ROWS_COUNT; x += 2) {
+    for (let y = 0; y < COLUMNS_COUNT; y += 2) {
+        for (let x = 0; x < ROWS_COUNT; x += 2) {
             if (!matrix[y][x]) return false
         }
     }
-
     return true
 }
 
@@ -356,7 +346,7 @@ const delay = (timeout: number): Promise < void > => {
     return new Promise(resolve => setTimeout(resolve, timeout))
 }
 
-let stack: Array < CELL > = [{
+const stack: Array < CELL > = [{
     x: 0,
     y: 0
 }]
@@ -364,7 +354,7 @@ const recursiveGenerate = async (BULDOZER: CELL) => {
     await animate(SHOW_ANIMATE, stack)
     if (stack.length === 0) return
 
-    let directions: Array < CELL > = []
+    const directions: Array < CELL > = []
     if (BULDOZER.x > 0) directions.push({
         x: -2,
         y: 0
@@ -423,14 +413,30 @@ const animate = async (SHOW_ANIMATE: boolean, STACK: Array < CELL > ) => {
 }
 
 export const main = async () => {
-    // while(!isComlpeted()) {
-    //     for (const BULDOZER of BULDOZERS) {
-    //         moveBuldozer(BULDOZER)
-    //     }
-    //     await animate(SHOW_ANIMATE, BULDOZERS)
-    // }
-    for (const BULDOZER of BULDOZERS) {
-        recursiveGenerate(BULDOZER)
+    for (let i = 0; i < BULDOZER_COUNTS; i++) {
+        BULDOZERS.push({
+            x: 0,
+            y: 0
+        })
+    }
+    switch (ALGORITHM) {
+        case 0:
+            while (!isComlpeted()) {
+                for (const BULDOZER of BULDOZERS) {
+                    moveBuldozer(BULDOZER)
+                }
+                await animate(SHOW_ANIMATE, BULDOZERS)
+            }
+            break
+    
+        case 1:
+            for (const BULDOZER of BULDOZERS) {
+                recursiveGenerate(BULDOZER)
+            }
+            break
+        default:
+            alert("Choose algorithm")
+            return
     }
     generateMaze()
     requestAnimationFrame(tick)

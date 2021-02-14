@@ -15,16 +15,16 @@
             <!-- <a class="navbar-brand">Navbar</a> -->
             <form class="d-flex" style="width: 100%;">
                 <div class="d-flex mx-2">
-                    <input class="form-control mx-2" type="text" placeholder="Columns" aria-label="Columns">
+                    <input class="form-control" type="text" placeholder="Columns" aria-label="Columns">
                     <input class="form-control mx-2" type="text" placeholder="Rows" aria-label="Rows">
                     <input class="form-control mx-2" type="text" placeholder="Cell Size" aria-label="Cell Size">
-                    <input class="form-control mx-2" type="text" placeholder="Creators Count" aria-label="Creators Count">
+                    <input class="form-control mx-2" type="text" id="buldozers-count" placeholder="Creators Count" aria-label="Creators Count">
                 </div>
                 <div class="mx-2">
-                    <select class="form-select form-control" id="inputGroupSelect01">
+                    <select class="form-select form-control" id="choose-algorithm">
                         <option selected disabled>Choose Algorithm...</option>
-                        <option value="1">Oldos-Broder</option>
-                        <option value="2">Recursive Backtracker</option>
+                        <option value="0">Oldos-Broder</option>
+                        <option value="1">Recursive Backtracker</option>
                         <!-- <option value="3">Three</option> -->
                     </select>
                 </div>
@@ -40,7 +40,7 @@
                         Show Animate
                     </label>
                 </div>
-                <button type="button" class="btn btn-primary btn-sm">Generate</button>
+                <button type="button" id="generate" class="btn btn-primary btn-sm">Generate</button>
             </form>
         </div>
     </nav>
