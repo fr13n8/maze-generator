@@ -6,16 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        html,
-        body {
-            overflow: hidden;
-        }
-    </style>
     <script src="./dist/script.js" defer></script>
 </head>
 
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand">Navbar</a> -->
+            <form class="d-flex" style="width: 100%;">
+                <div class="d-flex mx-2">
+                    <input class="form-control mx-2" type="text" placeholder="Columns" aria-label="Columns">
+                    <input class="form-control mx-2" type="text" placeholder="Rows" aria-label="Rows">
+                    <input class="form-control mx-2" type="text" placeholder="Cell Size" aria-label="Cell Size">
+                    <input class="form-control mx-2" type="text" placeholder="Creators Count" aria-label="Creators Count">
+                </div>
+                <div class="mx-2">
+                    <select class="form-select form-control" id="inputGroupSelect01">
+                        <option selected disabled>Choose Algorithm...</option>
+                        <option value="1">Oldos-Broder</option>
+                        <option value="2">Recursive Backtracker</option>
+                        <!-- <option value="3">Three</option> -->
+                    </select>
+                </div>
+                <div class="form-checkcform-control d-flex align-items-center mx-2">
+                    <div id="color-picker"></div>
+                    <p class="form-check-label mx-2">
+                        Set Color
+                    </p>
+                </div>
+                <div class="form-checkcform-control d-flex align-items-center mx-4">
+                    <input class="form-check-input" type="checkbox" value="" id="show-animate" checked>
+                    <label class="form-check-label" for="show-animate">
+                        Show Animate
+                    </label>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm">Generate</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container" id="canvas-container">
+        <!-- Content here -->
+    </div>
 </body>
 
 </html>

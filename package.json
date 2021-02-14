@@ -16,10 +16,25 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bootstrap": "^5.0.5",
+    "@types/jquery": "^3.5.5",
     "ts-loader": "^8.0.17",
     "typescript": "^4.1.5",
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@simonwep/pickr": "^1.8.0",
+    "autoprefixer": "^10.2.4",
+    "bootstrap": "^4.6.0",
+    "css-loader": "^5.0.2",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "postcss-loader": "^5.0.0",
+    "precss": "^4.0.0",
+    "sass": "^1.32.7",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0"
   }
 }
