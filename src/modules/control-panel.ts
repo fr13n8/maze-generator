@@ -13,3 +13,5 @@ const buldozersCountHandler = (): void => {
     Canvas.setBuldozersCount(+getBuldozersCount.value)
 }
 getBuldozersCount.addEventListener("keyup", buldozersCountHandler)
+
+// Switch show animation

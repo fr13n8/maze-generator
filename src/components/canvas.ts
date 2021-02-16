@@ -1,7 +1,24 @@
 import Settings from '../utils/state'
 import * as Types from '../utils/types'
-
-export default new class Canvas extends Settings {
+interface CanvasSettings {
+    COLUMNS_COUNT: number
+    ROWS_COUNT: number
+    PADDING: number
+    CELL_SIZE: number
+    WALL_COLOR: string
+    FREE_COLOR: string
+    BULDOZER_COLOR: string
+    DELAY_TIMEOUT: number
+    SHOW_ANIMATE: boolean
+    BULDOZER_COUNTS: number
+    _ALGORITHM: number
+    matrix: Types.MATRIX
+    canvas: HTMLCanvasElement
+    canvasW: number
+    canvasH: number
+    context: CanvasRenderingContext2D
+}
+export default new class Canvas extends Settings implements CanvasSettings {
     public matrix: Types.MATRIX
     public canvas: HTMLCanvasElement
     public canvasW: number
@@ -26,21 +43,21 @@ export default new class Canvas extends Settings {
         document.getElementById("canvas-container")!.appendChild(this.canvas)
     }
 
-    public generateMaze (): void {
-        for (let y = 0; y < this.COLUMNS_COUNT; y++) {
-            for (let x = 0; x < this.ROWS_COUNT; x++) {
-                const color: string = this.matrix[y][x] ? this.FREE_COLOR : this.WALL_COLOR
+    // public rerender (): void {
+    //     for (let y = 0; y < this.COLUMNS_COUNT; y++) {
+    //         for (let x = 0; x < this.ROWS_COUNT; x++) {
+    //             const color: string = this.matrix[y][x] ? this.FREE_COLOR : this.WALL_COLOR
     
-                this.context.beginPath()
-                this.context.rect(
-                    this.PADDING + x * this.CELL_SIZE,
-                    this.PADDING + y * this.CELL_SIZE,
-                    this.CELL_SIZE, this.CELL_SIZE)
-                this.context.fillStyle = color
-                this.context.fill()
-            }
-        }
-    }
+    //             this.context.beginPath()
+    //             this.context.rect(
+    //                 this.PADDING + x * this.CELL_SIZE,
+    //                 this.PADDING + y * this.CELL_SIZE,
+    //                 this.CELL_SIZE, this.CELL_SIZE)
+    //             this.context.fillStyle = color
+    //             this.context.fill()
+    //         }
+    //     }
+    // }
 
     protected createMatrix (columns: number, rows: number): Types.MATRIX {
         const matrix: Types.MATRIX = []

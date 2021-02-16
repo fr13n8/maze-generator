@@ -1,4 +1,5 @@
 export default class Settings{
+
     public COLUMNS_COUNT = 31
     public ROWS_COUNT = 31
     public PADDING = 20
@@ -6,10 +7,10 @@ export default class Settings{
     public WALL_COLOR = "black"
     public FREE_COLOR = "white"
     public BULDOZER_COLOR = "green"
-    public DELAY_TIMEOUT = 0
+    public DELAY_TIMEOUT = 10
     public SHOW_ANIMATE = true
     public BULDOZER_COUNTS = 1
-    protected _ALGORITHM: number
+    public _ALGORITHM: number
 
     get algorithm(): number {
         return this._ALGORITHM

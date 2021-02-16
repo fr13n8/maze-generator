@@ -1,10 +1,9 @@
 import { CELL, MOUSE, MATRIX } from '../utils/types'
-import Settings from '../utils/state'
-import { rand } from '../helpers/random'
 import animate from '../helpers/animate'
 import Canvas from '../components/canvas'
 import {moveBuldozer} from '../maze-algorithms/oldos-broder'
 import {recursiveGenerator} from "../maze-algorithms/recursive-backtracker"
+import {rerender} from '../helpers/rerender'
 
 const BULDOZERS: Array < CELL > = []
 
@@ -154,7 +153,6 @@ const getPath = (matrix: MATRIX , {
             continue
         }
     }
-    // console.log(paths)
     return paths
 }
 
@@ -251,7 +249,7 @@ export const main = async () => {
                 for (const BULDOZER of BULDOZERS) {
                     moveBuldozer(BULDOZER)
                 }
-                await animate(Canvas.SHOW_ANIMATE, BULDOZERS, Canvas.generateMaze, Canvas.context)
+                await animate(Canvas.SHOW_ANIMATE, BULDOZERS,  Canvas.context)
             }
             break
     
@@ -264,6 +262,6 @@ export const main = async () => {
             alert("Choose algorithm")
             return
     }
-    Canvas.generateMaze()
+    rerender()
     requestAnimationFrame(tick)
 }

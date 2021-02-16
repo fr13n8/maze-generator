@@ -9,7 +9,7 @@ export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
         y: 0
     }]
     const recursiveGenerate = async (BULDOZER: CELL) => {
-        await animate(Canvas.SHOW_ANIMATE, stack,  Canvas.generateMaze, Canvas.context)
+        await animate(Canvas.SHOW_ANIMATE, stack,   Canvas.context)
         if (stack.length === 0) return
     
         const directions: Array < CELL > = []
@@ -59,4 +59,5 @@ export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
             recursiveGenerate(stack[stack.length - 1])
         }
     }
+    recursiveGenerate(stack[0])
 }
