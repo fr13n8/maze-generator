@@ -3,7 +3,7 @@ import Canvas from '../components/canvas'
 import { rand } from '../helpers/random'
 import animate from '../helpers/animate'
 
-export const recursiveGenerator = (matrix: MATRIX ) => {
+export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
     const stack: Array < CELL > = [{
         x: 0,
         y: 0

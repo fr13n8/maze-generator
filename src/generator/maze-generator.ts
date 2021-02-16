@@ -3,7 +3,8 @@ import Settings from '../utils/state'
 import { rand } from '../helpers/random'
 import animate from '../helpers/animate'
 import Canvas from '../components/canvas'
-import {moveBuldozer} from '../maze-algorithms/oldos_broder'
+import {moveBuldozer} from '../maze-algorithms/oldos-broder'
+import {recursiveGenerator} from "../maze-algorithms/recursive-backtracker"
 
 const BULDOZERS: Array < CELL > = []
 
@@ -237,62 +238,6 @@ const isComlpeted = (): boolean => {
     return true
 }
 
-const stack: Array < CELL > = [{
-    x: 0,
-    y: 0
-}]
-const recursiveGenerate = async (BULDOZER: CELL) => {
-    await animate(Canvas.SHOW_ANIMATE, stack, Canvas.generateMaze, Canvas.context)
-    if (stack.length === 0) return
-
-    const directions: Array < CELL > = []
-    if (BULDOZER.x > 0) directions.push({
-        x: -2,
-        y: 0
-    })
-    if (BULDOZER.x < Canvas.COLUMNS_COUNT - 1) directions.push({
-        x: 2,
-        y: 0
-    })
-    if (BULDOZER.y > 0) directions.push({
-        x: 0,
-        y: -2
-    })
-    if (BULDOZER.y < Canvas.ROWS_COUNT - 1) directions.push({
-        x: 0,
-        y: 2
-    })
-
-    const dirs: Array < CELL > = directions.filter(({
-        x,
-        y
-    }: CELL) => {
-        return !Canvas.matrix[BULDOZER.y + y][BULDOZER.x + x]
-    })
-    if (dirs.length > 0) {
-        const {
-            x,
-            y
-        }: CELL = rand(dirs)
-        BULDOZER.x += x
-        BULDOZER.y += y
-        Canvas.matrix[BULDOZER.y][BULDOZER.x] = true
-        Canvas.matrix[BULDOZER.y - y / 2][BULDOZER.x - x / 2] = true
-        stack.push({
-            x: BULDOZER.x - x / 2,
-            y: BULDOZER.y - y / 2
-        })
-        stack.push({
-            x: BULDOZER.x,
-            y: BULDOZER.y
-        })
-        recursiveGenerate(BULDOZER)
-    } else {
-        stack.splice(stack.length - 2, stack.length)
-        recursiveGenerate(stack[stack.length - 1])
-    }
-}
-
 export const main = async () => {
     for (let i = 0; i < Canvas.BULDOZER_COUNTS; i++) {
         BULDOZERS.push({
@@ -312,7 +257,7 @@ export const main = async () => {
     
         case 1:
             for (const BULDOZER of BULDOZERS) {
-                recursiveGenerate(BULDOZER)
+                recursiveGenerator(Canvas.matrix, BULDOZER)
             }
             break
         default:
