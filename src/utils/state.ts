@@ -1,40 +1,29 @@
-const COLUMNS_COUNT = 31
-const ROWS_COUNT = 31
-const PADDING = 20
-const CELL_SIZE = 20
-const WALL_COLOR = 'black'
-const FREE_COLOR = 'white'
-let BULDOZER_COLOR = 'green'
-const DELAY_TIMEOUT = 0
-const SHOW_ANIMATE = true
-let BULDOZER_COUNTS = 1
-let ALGORITHM: number
+export default class Settings{
+    public COLUMNS_COUNT = 31
+    public ROWS_COUNT = 31
+    public PADDING = 20
+    public CELL_SIZE = 20
+    public WALL_COLOR = "black"
+    public FREE_COLOR = "white"
+    public BULDOZER_COLOR = "green"
+    public DELAY_TIMEOUT = 0
+    public SHOW_ANIMATE = true
+    public BULDOZER_COUNTS = 1
+    protected _ALGORITHM: number
 
-const changeAlgorithm = (type: number): void => {
-    ALGORITHM = type
-}
+    get algorithm(): number {
+        return this._ALGORITHM
+    }
 
-const changeColor = (color: string): void => {
-    BULDOZER_COLOR = color
-}
-
-const setBuldozersCount = (count: number): void => {
-    BULDOZER_COUNTS = count
-}
-
-export {
-    COLUMNS_COUNT,
-    ROWS_COUNT,
-    PADDING,
-    CELL_SIZE,
-    WALL_COLOR,
-    FREE_COLOR,
-    BULDOZER_COUNTS,
-    BULDOZER_COLOR,
-    DELAY_TIMEOUT,
-    SHOW_ANIMATE,
-    ALGORITHM,
-    changeAlgorithm,
-    changeColor,
-    setBuldozersCount
+    set algorithm(type: number) {
+        this._ALGORITHM = type
+    }
+    
+    changeColor(color: string): void {
+        this.BULDOZER_COLOR = color
+    }
+    
+    setBuldozersCount(count: number): void {
+        this.BULDOZER_COUNTS = count
+    }
 }

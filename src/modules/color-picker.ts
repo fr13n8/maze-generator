@@ -1,4 +1,4 @@
-import {changeColor} from '../utils/state'
+import Canvas from '../components/canvas'
 const Pickr = require('@simonwep/pickr')!
 // import * as Pickr from '@simonwep/pickr';
 
@@ -24,7 +24,7 @@ const pickr = Pickr.create({
 
 pickr.on('save', (color: any, instance: any) => {
     console.log('Event: "save"', color, instance)
-    changeColor(color.toHEXA())
+    Canvas.changeColor(color.toHEXA())
 })
 
 export default pickr

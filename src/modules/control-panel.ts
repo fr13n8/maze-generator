@@ -1,14 +1,15 @@
-import {changeAlgorithm, setBuldozersCount} from '../utils/state'
+import Canvas from '../components/canvas'
 
 // Choose algorithm
 const chooseAlgorithm = document.querySelector("select[id=choose-algorithm]")! as HTMLSelectElement
 const selectChangeHandler = (): void => {
-    changeAlgorithm(+chooseAlgorithm.value)
+    Canvas.algorithm = (+chooseAlgorithm.value)
 }
 chooseAlgorithm.addEventListener('change', selectChangeHandler)
 
+// Set count of creators
 const getBuldozersCount = document.getElementById("buldozers-count")! as HTMLInputElement
 const buldozersCountHandler = (): void => {
-    setBuldozersCount(+getBuldozersCount.value)
+    Canvas.setBuldozersCount(+getBuldozersCount.value)
 }
 getBuldozersCount.addEventListener("keyup", buldozersCountHandler)

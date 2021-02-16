@@ -1,3 +1,5 @@
+type MATRIX = Array < Array < boolean >>
+
 type CELL = {
     x: number,
     y: number
@@ -15,5 +17,6 @@ type MOUSE = {
 
 export {
     CELL,
-    MOUSE   
+    MOUSE,
+    MATRIX
 }
