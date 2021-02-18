@@ -43,21 +43,21 @@ export default new class Canvas extends Settings implements CanvasSettings {
         document.getElementById("canvas-container")!.appendChild(this.canvas)
     }
 
-    // public rerender (): void {
-    //     for (let y = 0; y < this.COLUMNS_COUNT; y++) {
-    //         for (let x = 0; x < this.ROWS_COUNT; x++) {
-    //             const color: string = this.matrix[y][x] ? this.FREE_COLOR : this.WALL_COLOR
+    public rerender (): void {
+        for (let y = 0; y < this.COLUMNS_COUNT; y++) {
+            for (let x = 0; x < this.ROWS_COUNT; x++) {
+                const color: string = this.matrix[y][x] ? this.FREE_COLOR : this.WALL_COLOR
     
-    //             this.context.beginPath()
-    //             this.context.rect(
-    //                 this.PADDING + x * this.CELL_SIZE,
-    //                 this.PADDING + y * this.CELL_SIZE,
-    //                 this.CELL_SIZE, this.CELL_SIZE)
-    //             this.context.fillStyle = color
-    //             this.context.fill()
-    //         }
-    //     }
-    // }
+                this.context.beginPath()
+                this.context.rect(
+                    this.PADDING + x * this.CELL_SIZE,
+                    this.PADDING + y * this.CELL_SIZE,
+                    this.CELL_SIZE, this.CELL_SIZE)
+                this.context.fillStyle = color
+                this.context.fill()
+            }
+        }
+    }
 
     protected createMatrix (columns: number, rows: number): Types.MATRIX {
         const matrix: Types.MATRIX = []

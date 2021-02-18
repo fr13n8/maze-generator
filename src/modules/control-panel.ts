@@ -15,3 +15,15 @@ const buldozersCountHandler = (): void => {
 getBuldozersCount.addEventListener("keyup", buldozersCountHandler)
 
 // Switch show animation
+const showAnimation = document.getElementById('show-animate')! as HTMLInputElement
+const showAnimationSwitch = (): void => {
+    Canvas.setShowAnimation(showAnimation.checked)
+}
+showAnimation.addEventListener('change', showAnimationSwitch)
+
+// Animation speed
+const animationDelay = document.getElementById('animation-delay')! as HTMLInputElement
+const changeAnimationDelay = (): void => {
+    Canvas.setAnimationDelay(+animationDelay.value)
+}
+animationDelay.addEventListener('change', changeAnimationDelay)

@@ -2,6 +2,7 @@ import { CELL, MATRIX } from '../utils/types'
 import Canvas from '../components/canvas'
 import { rand } from '../helpers/random'
 import animate from '../helpers/animate'
+// import {rerender} from '../helpers/rerender'
 
 export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
     const stack: Array < CELL > = [{
@@ -9,9 +10,13 @@ export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
         y: 0
     }]
     const recursiveGenerate = async (BULDOZER: CELL) => {
-        await animate(Canvas.SHOW_ANIMATE, stack,   Canvas.context)
-        if (stack.length === 0) return
-    
+        
+        if (stack.length === 0) {
+            Canvas.rerender()
+            return
+        }
+        await animate(stack)
+        
         const directions: Array < CELL > = []
         if (BULDOZER.x > 0) directions.push({
             x: -2,

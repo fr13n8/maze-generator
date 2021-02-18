@@ -3,14 +3,13 @@ import animate from '../helpers/animate'
 import Canvas from '../components/canvas'
 import {moveBuldozer} from '../maze-algorithms/oldos-broder'
 import {recursiveGenerator} from "../maze-algorithms/recursive-backtracker"
-import {rerender} from '../helpers/rerender'
 
 const BULDOZERS: Array < CELL > = []
 
 let cell1: CELL = null!
 let cell2: CELL = null!
 let paths: Array < Array < null | boolean | number >> = []
-let route: Array < CELL > = []
+const route: Array < CELL > = []
 
 // Found route 
 
@@ -56,13 +55,13 @@ const createMouse = (element: HTMLCanvasElement) => {
 
 const mouse: MOUSE = createMouse(Canvas.canvas)
 
-const getPath = (matrix: MATRIX , {
+const getPath = async (matrix: MATRIX , {
     x: x1,
     y: y1
 }: CELL, {
     x: x2,
     y: y2
-}: CELL): Array < Array < null | boolean | number >> => {
+}: CELL): Promise<Array<Array<null | boolean | number>>> => {
 
     for (let y = 0; y < matrix.length; y++) {
         const row: Array < null | boolean > = matrix[y].map((cell: boolean) => cell === false ? false : null)
@@ -70,15 +69,14 @@ const getPath = (matrix: MATRIX , {
     }
 
     paths[y2][x2] = 0
-
+    const stack:Array<CELL>=[]
     while (paths[y1][x1] === null) {
-
         for (let y = 0; y < matrix.length; y++) {
             for (let x = 0; x < matrix[y].length; x++) {
                 if (paths[y][x] === false || paths[y][x] === null) {
                     continue
                 }
-
+                
                 const count: number = Number(paths[y][x]) + 1
 
                 if (y > 0 && paths[y - 1][x] !== false) {
@@ -109,17 +107,18 @@ const getPath = (matrix: MATRIX , {
                         paths[y][x - 1] = count
                     }
                 }
+
+                // await animate(stack)
             }
         }
+        
     }
 
     // let [x2, y2]: [number, number] = [y1, x1]
     let endRouteValue = Number(paths[y1][x1])
-    route = []
-
     while (endRouteValue !== 1) {
+        await animate(route)
         endRouteValue--
-        console.log(y1, x1, endRouteValue)
         if (y1 > 0 && paths[y1 - 1][x1] === endRouteValue) {
             route.push({
                 y: y1 - 1,
@@ -189,39 +188,40 @@ const tick = async () => {
         }
 
         if (cell1 && cell2) {
-            paths = getPath(Canvas.matrix, cell1, cell2)
+            paths = await getPath(Canvas.matrix, cell1, cell2)
         }
 
-        if (paths) {
-            for (let y = 0; y < paths.length; y++) {
-                paths[y].map((item: boolean | null | number, x: number) => {
-                    if (item !== null && item !== false) {
-                        Canvas.context.fillStyle = "black"
-                        Canvas.context.font = "12px serif"
-                        Canvas.context.textAlign = "center"
-                        Canvas.context.textBaseline = "middle"
-                        Canvas.context.fillText(
-                            paths[y][x].toString(),
-                            Canvas.PADDING + x * Canvas.CELL_SIZE + Canvas.CELL_SIZE * 0.5,
-                            Canvas.PADDING + y * Canvas.CELL_SIZE + Canvas.CELL_SIZE * 0.5
-                        )
-                    }
-                })
-            }
-        }
+        // if (paths) {
+        //     for (let y = 0; y < paths.length; y++) {
+        //         paths[y].map((item: boolean | null | number, x: number) => {
+        //             if (item !== null && item !== false) {
+        //                 Canvas.context.fillStyle = "black"
+        //                 Canvas.context.font = "12px serif"
+        //                 Canvas.context.textAlign = "center"
+        //                 Canvas.context.textBaseline = "middle"
+        //                 Canvas.context.fillText(
+        //                     paths[y][x].toString(),
+        //                     Canvas.PADDING + x * Canvas.CELL_SIZE + Canvas.CELL_SIZE * 0.5,
+        //                     Canvas.PADDING + y * Canvas.CELL_SIZE + Canvas.CELL_SIZE * 0.5
+        //                 )
+        //             }
+        //         })
+        //     }
+        // }
 
-        route.map(({
-            x,
-            y
-        }: CELL) => {
-            Canvas.context.beginPath()
-            Canvas.context.rect(
-                Canvas.PADDING + x * Canvas.CELL_SIZE,
-                Canvas.PADDING + y * Canvas.CELL_SIZE,
-                Canvas.CELL_SIZE, Canvas.CELL_SIZE)
-            Canvas.context.fillStyle = "rgba(80,100,120, 0.5)"
-            Canvas.context.fill()
-        })
+        
+        // route.map(async ({
+        //     x,
+        //     y
+        // }: CELL) => {
+        //     Canvas.context.beginPath()
+        //     Canvas.context.rect(
+        //         Canvas.PADDING + x * Canvas.CELL_SIZE,
+        //         Canvas.PADDING + y * Canvas.CELL_SIZE,
+        //         Canvas.CELL_SIZE, Canvas.CELL_SIZE)
+        //     Canvas.context.fillStyle = "rgba(80,100,120, 0.5)"
+        //     Canvas.context.fill()
+        // })
     }
 
     mouse.update()
@@ -249,7 +249,7 @@ export const main = async () => {
                 for (const BULDOZER of BULDOZERS) {
                     moveBuldozer(BULDOZER)
                 }
-                await animate(Canvas.SHOW_ANIMATE, BULDOZERS,  Canvas.context)
+                await animate(BULDOZERS)
             }
             break
     
@@ -262,6 +262,6 @@ export const main = async () => {
             alert("Choose algorithm")
             return
     }
-    rerender()
+    Canvas.rerender()
     requestAnimationFrame(tick)
 }

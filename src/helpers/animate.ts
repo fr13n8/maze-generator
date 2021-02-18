@@ -1,9 +1,9 @@
 
 import { CELL } from '../utils/types'
 import Canvas from '../components/canvas'
-import {rerender} from '../helpers/rerender'
 
-const drawBuldozer = (BULDOZER: CELL, context: CanvasRenderingContext2D): void => {
+const drawBuldozer = (BULDOZER: CELL): void => {
+    const context = Canvas.context
     context.beginPath()
     context.rect(
         Canvas.PADDING + BULDOZER.x * Canvas.CELL_SIZE,
@@ -17,11 +17,11 @@ const delay = (timeout: number): Promise < void > => {
     return new Promise(resolve => setTimeout(resolve, timeout))
 }
 
-const animate = async (SHOW_ANIMATE: boolean, STACK: Array < CELL >, context: CanvasRenderingContext2D) => {
-    if (SHOW_ANIMATE) {
-        rerender()
+const animate = async (STACK: Array < CELL >) => {
+    if (Canvas.SHOW_ANIMATE) {
+        Canvas.rerender()
         for (const BULDOZER of STACK) {
-            drawBuldozer(BULDOZER, context)
+            drawBuldozer(BULDOZER)
         }
         await delay(Canvas.DELAY_TIMEOUT)
     }
