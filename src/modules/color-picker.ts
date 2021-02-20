@@ -4,7 +4,8 @@ const Pickr = require('@simonwep/pickr')!
 
 const pickr = Pickr.create({
     el: '#color-picker',
-    theme: 'nano', // or 'monolith', or 'nano'
+    theme: 'nano', // or 'monolith', or 'nano',
+    default: Canvas.BULDOZER_COLOR,
     components: {
 
         // Main components

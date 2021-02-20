@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-light">
         <div class="container-fluid">
             <!-- <a class="navbar-brand">Navbar</a> -->
             <form class="d-flex" style="width: 100%;">
                 <div class="d-flex mx-2">
-                    <input class="form-control mx-2" type="text" id="buldozers-count" placeholder="Creators Count" aria-label="Creators Count">
+                    <input class="form-control mx-2" type="text" id="buldozers-count" disabled="true" placeholder="Creators Count" aria-label="Creators Count">
                 </div>
                 <div class="mx-2">
                     <select class="form-select form-control" id="choose-algorithm">
@@ -38,14 +38,14 @@
                     </label>
                 </div>
                 <div class="d-flex align-items-center mx-2">
-                    <label for="customRange2" class="form-label">Example range</label>
+                    <label for="customRange2" class="form-label">Animation speed</label>
                     <input type="range" class="form-range" min="0" max="1000" step="0.1" id="animation-delay">
                 </div>
                 <button type="button" id="generate" class="btn btn-primary btn-sm">Generate</button>
             </form>
         </div>
     </nav>
-    <div class="container" id="canvas-container">
+    <div class="container d-flex justify-content-center mt-3" id="canvas-container">
         <!-- Content here -->
     </div>
 </body>

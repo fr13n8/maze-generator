@@ -1,12 +1,12 @@
 export default class Settings{
 
-    public COLUMNS_COUNT = 101
-    public ROWS_COUNT = 101
+    public COLUMNS_COUNT = 91
+    public ROWS_COUNT = 91
     public PADDING = 7
     public CELL_SIZE = 7
-    public WALL_COLOR = "black"
+    public WALL_COLOR = "#090B10"
     public FREE_COLOR = "white"
-    public BULDOZER_COLOR = "green"
+    public BULDOZER_COLOR = "#89DDFF"
     public DELAY_TIMEOUT = 0
     public SHOW_ANIMATE = true
     public BULDOZER_COUNTS = 1
