@@ -2,6 +2,15 @@ import {CELL} from '../utils/types'
 import Canvas from '../components/canvas'
 import {rand} from '../helpers/random'
 
+export const isComlpeted = (): boolean => {
+    for (let y = 0; y < Canvas.ROWS_COUNT; y += 2) {
+        for (let x = 0; x < Canvas.COLUMNS_COUNT; x += 2) {
+            if (!Canvas.matrix[y][x]) return false
+        }
+    }
+    return true
+}
+
 export const moveBuldozer = (BULDOZER: CELL): void => {
     const directions: Array < CELL > = []
 

@@ -6,8 +6,8 @@ const drawBuldozer = (BULDOZER: CELL): void => {
     const context = Canvas.context
     context.beginPath()
     context.rect(
-        Canvas.PADDING + BULDOZER.x * Canvas.CELL_SIZE,
-        Canvas.PADDING + BULDOZER.y * Canvas.CELL_SIZE,
+        Canvas.CELL_SIZE + BULDOZER.x * Canvas.CELL_SIZE + 0.5,
+        Canvas.CELL_SIZE + BULDOZER.y * Canvas.CELL_SIZE + 0.5,
         Canvas.CELL_SIZE, Canvas.CELL_SIZE)
     context.fillStyle = Canvas.BULDOZER_COLOR
     context.fill()

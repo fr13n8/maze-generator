@@ -1,7 +1,7 @@
 import { CELL, MOUSE, MATRIX } from '../utils/types'
 import animate from '../helpers/animate'
 import Canvas from '../components/canvas'
-import {moveBuldozer} from '../maze-algorithms/oldos-broder'
+import {moveBuldozer, isComlpeted} from '../maze-algorithms/oldos-broder'
 import {recursiveGenerator} from "../maze-algorithms/recursive-backtracker"
 import {getPath} from '../path-algorithms/breadth-first-search'
 
@@ -56,16 +56,16 @@ const tick = async () => {
     requestAnimationFrame(tick)
 
     if (
-        mouse.x < Canvas.PADDING ||
-        mouse.y < Canvas.PADDING ||
-        mouse.x > Canvas.canvasW - Canvas.PADDING ||
-        mouse.y > Canvas.canvasH - Canvas.PADDING
+        mouse.x < Canvas.CELL_SIZE ||
+        mouse.y < Canvas.CELL_SIZE ||
+        mouse.x > Canvas.canvasW - Canvas.CELL_SIZE ||
+        mouse.y > Canvas.canvasH - Canvas.CELL_SIZE
     ) {
         return
     }
 
-    const x: number = Math.floor((mouse.x - Canvas.PADDING) / Canvas.CELL_SIZE)
-    const y: number = Math.floor((mouse.y - Canvas.PADDING) / Canvas.CELL_SIZE)
+    const x: number = Math.floor((mouse.x - Canvas.CELL_SIZE) / Canvas.CELL_SIZE)
+    const y: number = Math.floor((mouse.y - Canvas.CELL_SIZE) / Canvas.CELL_SIZE)
 
     if (mouse.left && !mouse.pLeft && Canvas.matrix[y][x]) {
         if (!cell1 || cell1.x != x || cell1.y != y) {
@@ -77,8 +77,8 @@ const tick = async () => {
 
             Canvas.context.beginPath()
             Canvas.context.rect(
-                Canvas.PADDING + x * Canvas.CELL_SIZE,
-                Canvas.PADDING + y * Canvas.CELL_SIZE,
+                Canvas.CELL_SIZE + x * Canvas.CELL_SIZE,
+                Canvas.CELL_SIZE + y * Canvas.CELL_SIZE,
                 Canvas.CELL_SIZE, Canvas.CELL_SIZE)
             Canvas.context.fillStyle = "rgba(200,10,0, 0.5)"
             Canvas.context.fill()
@@ -123,15 +123,6 @@ const tick = async () => {
     }
 
     mouse.update()
-}
-
-const isComlpeted = (): boolean => {
-    for (let y = 0; y < Canvas.COLUMNS_COUNT; y += 2) {
-        for (let x = 0; x < Canvas.ROWS_COUNT; x += 2) {
-            if (!Canvas.matrix[y][x]) return false
-        }
-    }
-    return true
 }
 
 export const main = async () => {

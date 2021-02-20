@@ -1,10 +1,9 @@
 export default class Settings{
 
-    public COLUMNS_COUNT = 91
-    public ROWS_COUNT = 91
-    public PADDING = 7
-    public CELL_SIZE = 7
-    public WALL_COLOR = "#090B10"
+    public COLUMNS_COUNT = 31
+    public ROWS_COUNT = 15
+    public CELL_SIZE = 40
+    public WALL_COLOR = "#A69F9C"
     public FREE_COLOR = "white"
     public BULDOZER_COLOR = "#89DDFF"
     public DELAY_TIMEOUT = 0
