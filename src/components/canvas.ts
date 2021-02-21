@@ -10,7 +10,7 @@ interface CanvasSettings {
     DELAY_TIMEOUT: number
     SHOW_ANIMATE: boolean
     BULDOZER_COUNTS: number
-    _ALGORITHM: number
+    _MAZE_ALGORITHM: number
     matrix: Types.MATRIX
     canvas: HTMLCanvasElement
     canvasW: number
@@ -27,7 +27,7 @@ export default new class Canvas extends Settings implements CanvasSettings {
     constructor(){
         super()
         
-        this.matrix = this.createMatrix(this.COLUMNS_COUNT, this.ROWS_COUNT)
+        this.createMatrix()
 
         this.canvas = document.createElement('canvas')
         this.canvas.width = this.CELL_SIZE * 2 + this.COLUMNS_COUNT * this.CELL_SIZE
@@ -77,20 +77,23 @@ export default new class Canvas extends Settings implements CanvasSettings {
         this.context.stroke()
     }
 
-    protected createMatrix (columns: number, rows: number): Types.MATRIX {
+    protected createMatrix (): void {
         const matrix: Types.MATRIX = []
-        for (let y = 0; y < rows; y++) {
+        for (let y = 0; y < this.ROWS_COUNT; y++) {
             const row: Array < boolean > = []
-            for (let x = 0; x < columns; x++) {
+            for (let x = 0; x < this.COLUMNS_COUNT; x++) {
                 row.push(false)
             }
             matrix.push(row)
         }
         matrix[0][0] = true
-        return matrix
+        this.matrix =  matrix
     }
 
     public clearALlCanvas(): void {
-        this.context.clearRect(0, 0, this.canvasW, this.canvasH)
+        // this.context.clearRect(0, 0, this.canvasW, this.canvasH)
+        this.createMatrix()
+        // this.drawGrid()
+        this.rerender()
       }
 }

@@ -3,7 +3,7 @@ import animate from '../helpers/animate'
 import Canvas from '../components/canvas'
 import {moveBuldozer, isComlpeted} from '../maze-algorithms/oldos-broder'
 import {recursiveGenerator} from "../maze-algorithms/recursive-backtracker"
-import {getPath} from '../path-algorithms/breadth-first-search'
+import {breadtFirstSearch} from '../path-algorithms/breadth-first-search'
 
 const BULDOZERS: Array < CELL > = []
 
@@ -85,8 +85,18 @@ const tick = async () => {
         }
 
         if (cell1 && cell2) {
-            // paths = await getPath(Canvas.matrix, cell1, cell2)
-            await getPath(Canvas.matrix, cell1, cell2)
+            switch (Canvas.pathAlgorithm) {
+                case 0:
+                    await breadtFirstSearch(Canvas.matrix, cell1, cell2)
+                    break
+            
+                default:
+                    Canvas.rerender()
+                    cell1 = null
+                    cell2 = null
+                    alert("Please choose searach path algorithm")
+                    break
+            }
         }
 
         // if (paths) {
@@ -132,7 +142,7 @@ export const main = async () => {
             y: 0
         })
     }
-    switch (Canvas.algorithm) {
+    switch (Canvas.mazeAlgorithm) {
         case 0:
             while (!isComlpeted()) {
                 for (const BULDOZER of BULDOZERS) {

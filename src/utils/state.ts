@@ -9,16 +9,25 @@ export default class Settings{
     public DELAY_TIMEOUT = 0
     public SHOW_ANIMATE = true
     public BULDOZER_COUNTS = 1
-    public _ALGORITHM: number
+    public _MAZE_ALGORITHM: number
+    public _PATH_ALGORITHM: number
 
-    get algorithm(): number {
-        return this._ALGORITHM
+    get mazeAlgorithm(): number {
+        return this._MAZE_ALGORITHM
     }
 
-    set algorithm(type: number) {
-        this._ALGORITHM = type
+    set mazeAlgorithm(type: number) {
+        this._MAZE_ALGORITHM = type
     }
     
+    get pathAlgorithm(): number {
+        return this._PATH_ALGORITHM
+    }
+
+    set pathAlgorithm(type: number) {
+        this._PATH_ALGORITHM = type
+    }
+
     changeColor(color: string): void {
         this.BULDOZER_COLOR = color
     }

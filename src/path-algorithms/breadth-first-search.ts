@@ -5,13 +5,13 @@ import animate from '../helpers/animate'
 const paths: Array < Array < null | boolean | number >> = []
 const route: Array < CELL > = []
 
-export const getPath = async (matrix: MATRIX , {
+export const breadtFirstSearch = async (matrix: MATRIX , {
     x: x1,
     y: y1
 }: CELL, {
     x: x2,
     y: y2
-}: CELL): Promise<Array<Array<null | boolean | number>>> => {
+}: CELL): Promise<Array<CELL>> => {
 
     for (let y = 0; y < matrix.length; y++) {
         const row: Array < null | boolean > = matrix[y].map((cell: boolean) => cell === false ? false : null)
@@ -67,6 +67,7 @@ export const getPath = async (matrix: MATRIX , {
     let endRouteValue = Number(paths[y1][x1])
     while (endRouteValue !== 1) {
         await animate(route)
+        
         endRouteValue--
         if (y1 > 0 && paths[y1 - 1][x1] === endRouteValue) {
             route.push({
@@ -101,5 +102,19 @@ export const getPath = async (matrix: MATRIX , {
             continue
         }
     }
-    return paths
+
+    // Canvas.rerender()
+    // route.map(({
+    //     x,
+    //     y
+    // }: CELL) => {
+    //     Canvas.context.beginPath()
+    //     Canvas.context.rect(
+    //         Canvas.CELL_SIZE + x * Canvas.CELL_SIZE,
+    //         Canvas.CELL_SIZE + y * Canvas.CELL_SIZE,
+    //         Canvas.CELL_SIZE, Canvas.CELL_SIZE)
+    //     Canvas.context.fillStyle = "rgba(80,100,120, 0.5)"
+    //     Canvas.context.fill()
+    // })
+    return route
 }

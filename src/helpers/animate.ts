@@ -25,6 +25,7 @@ const animate = async (STACK: Array < CELL >) => {
         }
         await delay(Canvas.DELAY_TIMEOUT)
     }
+    return
 }
 
 export default animate
