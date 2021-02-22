@@ -4,13 +4,13 @@ import { rand } from '../helpers/random'
 import animate from '../helpers/animate'
 // import {rerender} from '../helpers/rerender'
 
-export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
+export const recursiveGenerator = (matrix: MATRIX) => {
     const stack: Array < CELL > = [{
         x: 0,
         y: 0
     }]
-    const recursiveGenerate = async (BULDOZER: CELL) => {
-        
+    const recursiveGenerate = async (nextCell: CELL) => {
+        console.log([...stack])
         if (stack.length === 0) {
             Canvas.rerender()
             return
@@ -18,19 +18,19 @@ export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
         await animate(stack)
         
         const directions: Array < CELL > = []
-        if (BULDOZER.x > 0) directions.push({
+        if (nextCell.x > 0) directions.push({
             x: -2,
             y: 0
         })
-        if (BULDOZER.x < Canvas.COLUMNS_COUNT - 1) directions.push({
+        if (nextCell.x < Canvas.COLUMNS_COUNT - 1) directions.push({
             x: 2,
             y: 0
         })
-        if (BULDOZER.y > 0) directions.push({
+        if (nextCell.y > 0) directions.push({
             x: 0,
             y: -2
         })
-        if (BULDOZER.y < Canvas.ROWS_COUNT - 1) directions.push({
+        if (nextCell.y < Canvas.ROWS_COUNT - 1) directions.push({
             x: 0,
             y: 2
         })
@@ -39,30 +39,32 @@ export const recursiveGenerator = (matrix: MATRIX, BULDOZER: CELL) => {
             x,
             y
         }: CELL) => {
-            return !matrix[BULDOZER.y + y][BULDOZER.x + x]
+            return !matrix[nextCell.y + y][nextCell.x + x]
         })
         if (dirs.length > 0) {
             const {
                 x,
                 y
             }: CELL = rand(dirs)
-            BULDOZER.x += x
-            BULDOZER.y += y
-            matrix[BULDOZER.y][BULDOZER.x] = true
-            matrix[BULDOZER.y - y / 2][BULDOZER.x - x / 2] = true
+            nextCell.x += x
+            nextCell.y += y
+            matrix[nextCell.y][nextCell.x] = true
+            matrix[nextCell.y - y / 2][nextCell.x - x / 2] = true
             stack.push({
-                x: BULDOZER.x - x / 2,
-                y: BULDOZER.y - y / 2
+                x: nextCell.x - x / 2,
+                y: nextCell.y - y / 2
             })
             stack.push({
-                x: BULDOZER.x,
-                y: BULDOZER.y
+                x: nextCell.x,
+                y: nextCell.y
             })
-            recursiveGenerate(BULDOZER)
+            // debugger
+            console.log(nextCell, {x, y})
+            recursiveGenerate({...nextCell})
         } else {
-            stack.splice(stack.length - 2, stack.length)
-            recursiveGenerate(stack[stack.length - 1])
+            stack.splice(-2)
+            recursiveGenerate({...stack[stack.length - 1]})
         }
     }
-    recursiveGenerate(stack[0])
+    recursiveGenerate({x: 0, y: 0})
 }

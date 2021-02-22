@@ -154,7 +154,7 @@ export const main = async () => {
     
         case 1:
             for (const BULDOZER of BULDOZERS) {
-                recursiveGenerator(Canvas.matrix, BULDOZER)
+                recursiveGenerator(Canvas.matrix)
             }
             break
         default:
