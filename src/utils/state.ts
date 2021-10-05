@@ -1,7 +1,7 @@
 export default class Settings{
 
-    public COLUMNS_COUNT = 71
-    public ROWS_COUNT = 29
+    public COLUMNS_COUNT = 9 //71
+    public ROWS_COUNT = 9  //29
     public CELL_SIZE = 20
     public WALL_COLOR = "#A69F9C"
     public FREE_COLOR = "white"

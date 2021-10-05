@@ -4,7 +4,7 @@ import { rand } from '../helpers/random'
 import animate from '../helpers/animate'
 // import {rerender} from '../helpers/rerender'
 
-export const recursiveGenerator = (matrix: MATRIX) => {
+export const recursiveGenerator = (matrix: MATRIX): void => {
     const stack: Array < CELL > = [{
         x: 0,
         y: 0
