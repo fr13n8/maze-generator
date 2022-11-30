@@ -2,7 +2,7 @@
 
 ## **Labyrinth generation algorithms**
 ### **Aldous-Broder algorithm**
-From [Wikipedia](https://en.wikipedia.org/wiki/Swarm_intelligence), the free encyclopedia:
+From [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Aldous-Broder_algorithm), the free encyclopedia:
 >The Aldous-Broder algorithm also produces uniform spanning trees.
 >1. Pick a random cell as the current cell and mark it as visited.
 >2. While there are unvisited cells:
@@ -13,7 +13,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Swarm_intelligence), the free enc
 >             3. Make the chosen neighbour the current cell.
 
 ### **Randomized depth-first search algorithm**
-From [Wikipedia](https://en.wikipedia.org/wiki/Swarm_intelligence), the free encyclopedia:
+From [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_implementation), the free encyclopedia:
 >This algorithm, also known as the "recursive backtracker" algorithm, is a randomized version of the depth-first search algorithm.Frequently implemented with a stack, this approach is one of the simplest ways to generate a maze using a computer.Mazes generated with a depth-first search have a low branching factor and contain many long corridors, because the algorithm explores as far as possible along each branch before backtracking.
 >1. Given a current cell as a parameter
 >2. While there are unvisited cells:
@@ -27,5 +27,5 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Swarm_intelligence), the free enc
 ## **Path finding algorithms**
 
 ### **Breadth-first search (BFS)**
-From [Wikipedia](https://en.wikipedia.org/wiki/Swarm_intelligence), the free encyclopedia:
+From [Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search), the free encyclopedia:
 >BFS is an algorithm for searching a tree data structure for a node that satisfies a given property. It starts at the tree root and explores all nodes at the present depth prior to moving on to the nodes at the next depth level. Extra memory, usually a queue, is needed to keep track of the child nodes that were encountered but not yet explored.
