@@ -1,7 +1,7 @@
 import { CELL, MOUSE, MATRIX } from '../utils/types'
 import animate from '../helpers/animate'
 import Canvas from '../components/canvas'
-import {moveBuldozer, isComlpeted} from '../maze-algorithms/oldos-broder'
+import {moveBuldozer, isComlpeted} from '../maze-algorithms/aldous-broder'
 import {recursiveGenerator} from "../maze-algorithms/recursive-backtracker"
 import {breadtFirstSearch} from '../path-algorithms/breadth-first-search'
 
