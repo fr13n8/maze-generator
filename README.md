@@ -12,7 +12,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Aldous-
 >             2. Mark the chosen neighbour as visited.
 >             3. Make the chosen neighbour the current cell.
 
-https://user-images.githubusercontent.com/57458390/204815840-c696c200-5e05-4dae-af7c-b5f92c765996.mp4
+https://user-images.githubusercontent.com/57458390/204816777-66d40851-fbce-4feb-b576-dd3289f4c670.mp4
 
 ### **Randomized depth-first search algorithm**
 From [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_implementation), the free encyclopedia:
@@ -26,7 +26,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursi
 >             2. Remove the wall between the current cell and the chosen cell.
 >             3. Invoke the routine recursively for the chosen cell.
 
-https://user-images.githubusercontent.com/57458390/204816309-a8009697-dd96-4eb8-81e2-7d5e71431870.mp4
+https://user-images.githubusercontent.com/57458390/204816822-ce09b89e-2b30-4530-8f03-1dcfeb2aa35b.mp4
 
 ## **Path finding algorithms**
 
@@ -34,4 +34,4 @@ https://user-images.githubusercontent.com/57458390/204816309-a8009697-dd96-4eb8-
 From [Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search), the free encyclopedia:
 >BFS is an algorithm for searching a tree data structure for a node that satisfies a given property. It starts at the tree root and explores all nodes at the present depth prior to moving on to the nodes at the next depth level. Extra memory, usually a queue, is needed to keep track of the child nodes that were encountered but not yet explored.
 
-https://user-images.githubusercontent.com/57458390/204816425-3e98a7e6-3272-41db-b8be-a687c3269fc9.mp4
+https://user-images.githubusercontent.com/57458390/204816864-7511d9f6-297d-4dbd-8029-e0c102955c84.mp4
